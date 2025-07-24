@@ -48,3 +48,110 @@ We use marker commits and [git-subrepo](https://github.com/ingydotnet/git-subrep
 For a broad overview of the CI system take a look at [CI.md](CI.md).
 
 For some deeper information on individual scripts etc (for developing CI itself), take a look at [ci3/README.md](ci3/README.md).
+
+
+
+## 🔃 Update Sequencer Node
+
+### Update docker-compose method Nodes
+1- Stop node
+```console
+docker stop $(docker ps -q --filter "ancestor=aztecprotocol/aztec") && docker rm $(docker ps -a -q --filter "ancestor=aztecprotocol/aztec")
+
+# Or
+
+cd aztec
+docker compose down -v
+```
+
+2- Delete old data
+```bash
+rm -rf ~/.aztec/alpha-testnet/data/
+```
+
+3- Update CLI commands
+```bash
+source ~/.bashrc
+aztec-up 1.1.2
+```
+
+4- Open `docker-compose.yml`
+```bash
+nano docker-compose.yml
+```
+- Update private key:
+* Update `VALIDATOR_PRIVATE_KEY: ${VALIDATOR_PRIVATE_KEY}` under `environment` with the following:
+```
+VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+```
+* We added `s`
+
+5- Open `.env`
+```
+nano .env
+```
+- Update private key:
+* Update `VALIDATOR_PRIVATE_KEY` to `VALIDATOR_PRIVATE_KEYS`
+
+4- Rerun your node
+```
+docker compose up -d
+```
+
+
+### CLI Method
+* 1- Update your CLI start command to use `--sequencer.validatorPrivateKeys` (see added `s`) instead of `--sequencer.validatorPrivateKey`
+
+Command:
+- Open screen session
+- Press Ctrl +C
+
+Execute:
+```
+aztec start --node --archiver --sequencer \
+  --network alpha-testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls BEACON_URL \
+  --sequencer.validatorPrivateKeys "0xPrivatekey1,0xPrivatekey2,0xPrivatekey3" \
+  --sequencer.publisherPrivateKey 0xPrivatekeyX
+  --sequencer.coinbase 0xYourAddress \
+  --p2p.p2pIp IP
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
