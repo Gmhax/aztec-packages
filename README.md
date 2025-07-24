@@ -51,7 +51,7 @@ For some deeper information on individual scripts etc (for developing CI itself)
 
 
 
-## 🔃 Update Sequencer Node
+## 🔃 Update Sequencer Node (if you still encounter missed)
 
 ### Update docker-compose method Nodes
 1- Stop node
