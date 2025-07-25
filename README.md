@@ -241,7 +241,6 @@ This step seems limited to only teams and individuals in active set. Team is enc
 ```
 cd aztec
 docker compose down -v
-nano docker-compose.yml
 ```
 
 2- Add publisher key variable:
