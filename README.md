@@ -225,6 +225,8 @@ docker compose up -d
 docker compose logs -fn 1000
 ```
 
+NOTE: This guide is for who passing ZKpassport, Register your wallet address para malist sa queue. (Do it manually or reach the team on discord)
+
 
 
 
