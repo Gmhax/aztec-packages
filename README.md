@@ -117,6 +117,8 @@ aztec start --node --archiver --sequencer \
   --p2p.p2pIp IP
 ```
 
+
+
 -------------------------------------------------------------------------------------------------------------------
 ## Hardware Requirements
 <table>
@@ -224,6 +226,10 @@ docker compose logs -fn 1000
 ```
 
 
+
+
+
+
 --------------------
 
 
@@ -238,28 +244,19 @@ docker compose down -v
 nano docker-compose.yml
 ```
 
-2- Update private key:
-* Update `VALIDATOR_PRIVATE_KEY: ${VALIDATOR_PRIVATE_KEY}` under `environment` with the following:
-```
-VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
-```
-* We added `s`
-
-3- Add publisher key variable:
+2- Add publisher key variable:
 * Adding a publisher wallet will make you handle all the transactions of your validators with on wallet
 
 
-
-4- Open `.env`
+3- Open `.env`
 ```
 nano .env
 ```
 
-5- Update private key:
+4- Update private key:
 * Update `VALIDATOR_PRIVATE_KEY` to `VALIDATOR_PRIVATE_KEYS`
 * Values of `VALIDATOR_PRIVATE_KEYS` must be a comma (`,`) separated list. (`"0xPrivatkey,0xPrivatkey,0xPrivatkey"`)
 * Coinbase field - Put one address only (ilagay mo lang yung wallet address pasok na sa validator set)
-
 
 Execute: 
 ```
