@@ -113,7 +113,6 @@ aztec start --node --archiver --sequencer \
   --l1-rpc-urls RPC_URL  \
   --l1-consensus-host-urls BEACON_URL \
   --sequencer.validatorPrivateKeys "0xPrivatekey1,0xPrivatekey2,0xPrivatekey3" \
-  --sequencer.publisherPrivateKey 0xPrivatekeyX
   --sequencer.coinbase 0xYourAddress \
   --p2p.p2pIp IP
 ```
