@@ -139,7 +139,6 @@ aztec start --node --archiver --sequencer \
 
 
 ### Run Sequencer Node (kung gusto mo mag-run ng Multiple wallet sa iba mung vps)
-You can run Sequencer Node through one of these two methods: `Docker` or `CLI`
 
 ### Method 1: Run via Docker
 ## Enable Firewall & Open Ports
