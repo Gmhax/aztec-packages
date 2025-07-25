@@ -172,7 +172,7 @@ nano .env
 ```env
 ETHEREUM_RPC_URL=RPC_URL
 CONSENSUS_BEACON_URL=BEACON_URL
-VALIDATOR_PRIVATE_KEYS="0xYourPrivateKey,0xYourPrivateKey,0xYourPrivateKey")
+VALIDATOR_PRIVATE_KEYS="0xYourPrivateKey,0xYourPrivateKey,0xYourPrivateKey"
 COINBASE=0xYourAddress
 P2P_IP=P2P_IP
 ```
