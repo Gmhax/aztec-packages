@@ -119,11 +119,226 @@ aztec start --node --archiver --sequencer \
 ```
 
 
+-------------------------------------------------------------------------
+## Run Multiple Validators
+This step seems limited to only teams and individuals in active set. Team is encouraging teams to run 10 validators. Ask the team if you are going to run more validators
+
+### Docker Method
+1- Open `docker-compose.yml`
+```
+cd aztec
+docker compose down -v
+nano docker-compose.yml
+```
+
+2- Update private key:
+* Update `VALIDATOR_PRIVATE_KEY: ${VALIDATOR_PRIVATE_KEY}` under `environment` with the following:
+```
+VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+```
+* We added `s`
+
+3- Add publisher key variable:
+* Adding a publisher wallet will make you handle all the transactions of your validators with on wallet
 
 
 
+4- Open `.env`
+```
+nano .env
+```
+
+5- Update private key:
+* Update `VALIDATOR_PRIVATE_KEY` to `VALIDATOR_PRIVATE_KEYS`
+* Values of `VALIDATOR_PRIVATE_KEYS` must be a comma (`,`) separated list. (`"0xPrivatkey,0xPrivatkey,0xPrivatkey"`)
+* Coinbase field - Put one address only (ilagay mo lang yung wallet address pasok na sa validator set)
 
 
+Execute: 
+```
+docker compose up -d
+```
+
+6- Register each validator on the network
+* Do it manually or reach the team on discord.
+
+
+-------------------------------------------------------------------------------------------------------------------
+## Hardware Requirements
+<table>
+  <tr>
+    <th colspan="3"> Sequencer Node HW Requirements </th>
+  </tr>
+  <tr>
+    <td>RAM</td>
+    <td>CPU</td>
+    <td>Disk</td>
+  </tr>
+  <tr>
+    <td><code>8-16 GB</code></td>
+    <td><code>4-9 cores</code></td>
+    <td><code>100+ GB SSD</code></td>
+  </tr>
+</table>
+
+
+### Run Sequencer Node (kung gusto mo mag-run ng Multiple wallet sa iba mung vps)
+You can run Sequencer Node through one of these two methods: `Docker` or `CLI`
+
+### Method 1: Run via Docker
+## Enable Firewall & Open Ports
+```console
+# Firewall
+ufw allow 22
+ufw allow ssh
+ufw enable
+
+# Sequencer
+ufw allow 40400
+ufw allow 8080
+```
+
+* Create `aztec` directory:
+```bash
+mkdir aztec
+```
+
+* Get into `aztec` directory:
+```bash
+cd aztec
+```
+ 
+* Create `.env`
+```bash
+nano .env
+```
+
+* Replace the following code in `.env`
+```env
+ETHEREUM_RPC_URL=RPC_URL
+CONSENSUS_BEACON_URL=BEACON_URL
+VALIDATOR_PRIVATE_KEYS=0xYourPrivateKey
+COINBASE=0xYourAddress
+P2P_IP=P2P_IP
+```
+* Replace the following variables before you Run Node:
+  * `RPC_URL` & `BEACON_URL`: Step 4
+  * `0xYourPrivateKey`: Your EVM wallet private key starting with `0x...`
+  * `0xYourAddress`: Your EVM wallet public address starting with `0x...`
+  * `P2P_IP`: Your server IP (Step 7)
+
+
+* Create `docker-compose.yml`:
+```bash
+nano docker-compose.yml
+```
+
+* Replace the following code in `docker-compose.yml`
+```yml
+services:
+  aztec-node:
+    container_name: aztec-sequencer
+    image: aztecprotocol/aztec:1.1.2
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      COINBASE: ${COINBASE}
+      P2P_IP: ${P2P_IP}
+      LOG_LEVEL: info
+    entrypoint: >
+      sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network alpha-testnet --node --archiver --sequencer'
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8080:8080
+    volumes:
+      - /root/.aztec/alpha-testnet/data/:/data
+```
+Note: My node data directory configued in `docker-compose.yml` is `/root/.aztec/alpha-testnet/data/`, yours can be anything.
+
+* Run Node Docker:
+```bash
+docker compose up -d
+```
+
+* Node Logs:
+ ```bash
+docker compose logs -fn 1000
+```
+
+
+--------------------
+
+
+## Run Multiple Validators (Kung nasa Validator set na yung Address mo pwede mung dagdagan yung wallet)
+This step seems limited to only teams and individuals in active set. Team is encouraging teams to run 10 validators. Ask the team if you are going to run more validators
+
+### Docker Method
+1- Open `docker-compose.yml`
+```
+cd aztec
+docker compose down -v
+nano docker-compose.yml
+```
+
+2- Update private key:
+* Update `VALIDATOR_PRIVATE_KEY: ${VALIDATOR_PRIVATE_KEY}` under `environment` with the following:
+```
+VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+```
+* We added `s`
+
+3- Add publisher key variable:
+* Adding a publisher wallet will make you handle all the transactions of your validators with on wallet
+
+
+
+4- Open `.env`
+```
+nano .env
+```
+
+5- Update private key:
+* Update `VALIDATOR_PRIVATE_KEY` to `VALIDATOR_PRIVATE_KEYS`
+* Values of `VALIDATOR_PRIVATE_KEYS` must be a comma (`,`) separated list. (`"0xPrivatkey,0xPrivatkey,0xPrivatkey"`)
+* Coinbase field - Put one address only (ilagay mo lang yung wallet address pasok na sa validator set)
+
+
+Execute: 
+```
+docker compose up -d
+```
+
+## Done for docker
+
+
+
+### CLI Method
+* 1- Update your CLI start command to use `--sequencer.validatorPrivateKeys` (see added `s`) instead of `--sequencer.validatorPrivateKey` if you want to run multiple validators.
+  * The value of this should be a comma (`,`) separated list.
+   
+
+Example:
+```
+aztec start --node --archiver --sequencer \
+  --network alpha-testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls BEACON_URL \
+  --sequencer.validatorPrivateKeys "0xPrivatekey1,0xPrivatekey2,0xPrivatekey3" \
+  --sequencer.coinbase 0xYourAddress \
+  --p2p.p2pIp IP
+```
+* Coinbase field - Put one address only (ilagay mo lang yung wallet address pasok na sa validator set)
+## Done for CLI
+
+NOTE: Register your added wallet na hindi pa listed sa queue.
+* Do it manually or reach the team on discord.
+
+
+----------------------------------------------------------------------------------------------------------------
 
 
 
