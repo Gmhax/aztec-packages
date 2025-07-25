@@ -240,13 +240,13 @@ nano .env
 ```env
 ETHEREUM_RPC_URL=RPC_URL
 CONSENSUS_BEACON_URL=BEACON_URL
-VALIDATOR_PRIVATE_KEYS="0xYourPrivateKey,0xYourPrivateKey,0xYourPrivateKey"
+VALIDATOR_PRIVATE_KEYS="0xPrivatekey1,0xPrivatekey2,0xPrivatekey3"
 COINBASE=0xYourAddress
 P2P_IP=P2P_IP
 ```
 * Replace the following variables before you Run Node:
   * `RPC_URL` & `BEACON_URL`: Step 4
-  * `0xYourPrivateKey`: Your EVM wallet private key starting with `0x...`
+  * `0xYourPrivateKey`: Your EVM wallet private key starting with `0xPrivatekey1,0xPrivatekey2,0xPrivatekey3`
   * `0xYourAddress`: Your EVM wallet public address starting with `0x...`
   * `P2P_IP`: Your server IP (Step 7)
 
