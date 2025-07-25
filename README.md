@@ -117,51 +117,6 @@ aztec start --node --archiver --sequencer \
   --p2p.p2pIp IP
 ```
 
-
--------------------------------------------------------------------------
-## Run Multiple Validators
-This step seems limited to only teams and individuals in active set. Team is encouraging teams to run 10 validators. Ask the team if you are going to run more validators
-
-### Docker Method
-1- Open `docker-compose.yml`
-```
-cd aztec
-docker compose down -v
-nano docker-compose.yml
-```
-
-2- Update private key:
-* Update `VALIDATOR_PRIVATE_KEY: ${VALIDATOR_PRIVATE_KEY}` under `environment` with the following:
-```
-VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
-```
-* We added `s`
-
-3- Add publisher key variable:
-* Adding a publisher wallet will make you handle all the transactions of your validators with on wallet
-
-
-
-4- Open `.env`
-```
-nano .env
-```
-
-5- Update private key:
-* Update `VALIDATOR_PRIVATE_KEY` to `VALIDATOR_PRIVATE_KEYS`
-* Values of `VALIDATOR_PRIVATE_KEYS` must be a comma (`,`) separated list. (`"0xPrivatkey,0xPrivatkey,0xPrivatkey"`)
-* Coinbase field - Put one address only (ilagay mo lang yung wallet address pasok na sa validator set)
-
-
-Execute: 
-```
-docker compose up -d
-```
-
-6- Register each validator on the network
-* Do it manually or reach the team on discord.
-
-
 -------------------------------------------------------------------------------------------------------------------
 ## Hardware Requirements
 <table>
@@ -216,7 +171,7 @@ nano .env
 ```env
 ETHEREUM_RPC_URL=RPC_URL
 CONSENSUS_BEACON_URL=BEACON_URL
-VALIDATOR_PRIVATE_KEYS=0xYourPrivateKey
+VALIDATOR_PRIVATE_KEYS="0xYourPrivateKey,0xYourPrivateKey,0xYourPrivateKey")
 COINBASE=0xYourAddress
 P2P_IP=P2P_IP
 ```
