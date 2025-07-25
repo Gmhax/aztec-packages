@@ -145,7 +145,71 @@ aztec start --node --archiver --sequencer \
 NOTE: This guide is for who passing ZKpassport, Register your each wallet address para malist sa queue. (Do it manually or reach the team on discord)
 
 ### Method 1: Run via Docker
-## Enable Firewall & Open Ports
+
+## 1. Install Dependecies
+* Update packages:
+```bash
+sudo apt-get update && sudo apt-get upgrade -y
+```
+
+* Install Packages:
+```bash
+sudo apt install curl iptables build-essential git wget lz4 jq make gcc nano automake autoconf tmux htop nvme-cli libgbm1 pkg-config libssl-dev libleveldb-dev tar clang bsdmainutils ncdu unzip libleveldb-dev  -y
+```
+
+* Install Docker:
+```bash
+sudo apt update -y && sudo apt upgrade -y
+for pkg in docker.io docker-doc docker-compose podman-docker containerd runc; do sudo apt-get remove $pkg; done
+
+sudo apt-get update
+sudo apt-get install ca-certificates curl gnupg
+sudo install -m 0755 -d /etc/apt/keyrings
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /etc/apt/keyrings/docker.gpg
+sudo chmod a+r /etc/apt/keyrings/docker.gpg
+
+echo \
+  "deb [arch="$(dpkg --print-architecture)" signed-by=/etc/apt/keyrings/docker.gpg] https://download.docker.com/linux/ubuntu \
+  "$(. /etc/os-release && echo "$VERSION_CODENAME")" stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+
+sudo apt update -y && sudo apt upgrade -y
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+# Test Docker
+sudo docker run hello-world
+
+sudo systemctl enable docker
+sudo systemctl restart docker
+```
+
+---
+
+## 2. Install Aztec Tools
+```bash
+bash -i <(curl -s https://install.aztec.network)
+```
+```bash
+echo 'export PATH="$HOME/.aztec/bin:$PATH"' >> ~/.bashrc
+
+source ~/.bashrc
+```
+* **Restart your Terminal** now to apply changes.
+* Check if you installed successfully:
+```bash
+aztec
+```
+
+---
+
+## 3. Update Aztec
+```bash
+aztec-up latest
+aztec-up 1.1.2
+```
+
+## 4. Enable Firewall & Open Ports
 ```console
 # Firewall
 ufw allow 22
@@ -167,7 +231,7 @@ mkdir aztec
 cd aztec
 ```
  
-* Create `.env`
+* 5. Create `.env`
 ```bash
 nano .env
 ```
@@ -187,7 +251,7 @@ P2P_IP=P2P_IP
   * `P2P_IP`: Your server IP (Step 7)
 
 
-* Create `docker-compose.yml`:
+* 6. Create `docker-compose.yml`:
 ```bash
 nano docker-compose.yml
 ```
