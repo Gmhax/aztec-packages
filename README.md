@@ -143,7 +143,7 @@ aztec start --node --archiver --sequencer \
 
 
 NOTE: This guide is for who passing ZKpassport, Register your each wallet address para malist sa queue. (Do it manually or reach the team on discord)
-
+- Funds your per wallet 0.2 sepolia. 
 ### Method 1: Run via Docker
 
 ## 1. Install Dependecies
