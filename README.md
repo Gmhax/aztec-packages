@@ -142,7 +142,7 @@ aztec start --node --archiver --sequencer \
 </table>
 
 
-NOTE: This guide is for who passing ZKpassport, Register your wallet address para malist sa queue. (Do it manually or reach the team on discord)
+NOTE: This guide is for who passing ZKpassport, Register your each wallet address para malist sa queue. (Do it manually or reach the team on discord)
 
 ### Method 1: Run via Docker
 ## Enable Firewall & Open Ports
