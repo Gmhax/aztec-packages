@@ -120,6 +120,10 @@ aztec start --node --archiver --sequencer \
 
 
 -------------------------------------------------------------------------------------------------------------------
+
+
+### Run Sequencer Node (kung gusto mo mag-run ng Multiple wallet sa iba mung vps)
+
 ## Hardware Requirements
 <table>
   <tr>
@@ -137,8 +141,6 @@ aztec start --node --archiver --sequencer \
   </tr>
 </table>
 
-
-### Run Sequencer Node (kung gusto mo mag-run ng Multiple wallet sa iba mung vps)
 
 NOTE: This guide is for who passing ZKpassport, Register your wallet address para malist sa queue. (Do it manually or reach the team on discord)
 
