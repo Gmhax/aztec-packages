@@ -302,7 +302,7 @@ docker compose logs -fn 1000
 --------------------
 
 
-## Run Multiple Validators (Kung nasa Validator set na yung Address mo pwede mung dagdagan yung wallet)
+## Run Multiple Validators
 This step seems limited to only teams and individuals in active set. Team is encouraging teams to run 10 validators. Ask the team if you are going to run more validators
 
 ### Docker Method
