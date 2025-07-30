@@ -72,7 +72,7 @@ rm -rf ~/.aztec/alpha-testnet/data/
 3- Update CLI commands
 ```bash
 source ~/.bashrc
-aztec-up 1.1.2
+aztec-up 1.2.0
 ```
 
 4- Open `docker-compose.yml`
@@ -206,7 +206,7 @@ aztec
 ## 3. Update Aztec
 ```bash
 aztec-up latest
-aztec-up 1.1.2
+aztec-up 1.2.0
 ```
 
 ## 4. Enable Firewall & Open Ports
@@ -261,7 +261,7 @@ nano docker-compose.yml
 services:
   aztec-node:
     container_name: aztec-sequencer
-    image: aztecprotocol/aztec:1.1.2
+    image: aztecprotocol/aztec:1.2.0
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
