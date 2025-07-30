@@ -122,7 +122,7 @@ aztec start --node --archiver --sequencer \
 -------------------------------------------------------------------------------------------------------------------
 
 
-### Run Sequencer Node (kung gusto mo mag-run ng Multiple wallet sa iba mung vps)
+### Run Sequencer Node
 
 ## Hardware Requirements
 <table>
@@ -240,7 +240,7 @@ nano .env
 ```env
 ETHEREUM_RPC_URL=RPC_URL
 CONSENSUS_BEACON_URL=BEACON_URL
-VALIDATOR_PRIVATE_KEYS="0xPrivatekey1,0xPrivatekey2,0xPrivatekey3"
+VALIDATOR_PRIVATE_KEYS=0xPrivatekey1
 COINBASE=0xYourAddress
 P2P_IP=P2P_IP
 ```
