@@ -360,7 +360,7 @@ NOTE: Register your added wallet na hindi pa listed sa queue.
 ----------------------------------------------------------------------------------------------------------------
 
 
-🔃# Update Sequencer Node
+# Update Sequencer Node v1.2.1
 
 ## Update docker-compose method Nodes
 
