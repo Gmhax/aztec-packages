@@ -360,6 +360,85 @@ NOTE: Register your added wallet na hindi pa listed sa queue.
 ----------------------------------------------------------------------------------------------------------------
 
 
+🔃# Update Sequencer Node
+
+## Update docker-compose method Nodes
+
+1. Stop node
+```
+docker stop $(docker ps -q --filter "ancestor=aztecprotocol/aztec") && docker rm $(docker ps -a -q --filter "ancestor=aztecprotocol/aztec")
+
+# Or
+
+cd aztec
+docker compose down -v
+```
+
+2. Update CLI commands
+```
+source ~/.bashrc
+aztec-up 1.2.1
+```
+
+3. Delete old data
+```
+rm -rf ~/.aztec/alpha-testnet/data/
+```
+
+4. Edit docker-compose.yml
+```
+nano docker-compose.yml
+```
+- Edit this line - image: aztecprotocol/aztec:1.2.0 to image: aztecprotocol/aztec:1.2.1
+
+5. Re-run your node:
+```
+docker compose up -d
+```
+
+Check logs:
+```
+docker compose logs -fn 1000
+```
+
+## Done for Docker method
+
+# Update CLI method Nodes
+
+1. Stop node
+```
+screen -ls | grep -i aztec | awk '{print $1}' | xargs -I {} screen -X -S {} quit
+```
+
+2. Update CLI commands
+```
+source ~/.bashrc
+aztec-up 1.2.0
+```
+3. Delete old data
+```
+rm -rf ~/.aztec/alpha-testnet/data/
+```
+4. Rerun using this CLI command
+```
+aztec start --node --archiver --sequencer \
+  --network alpha-testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls BEACON_URL \
+  --sequencer.validatorPrivateKeys 0xYourPrivateKey \
+  --sequencer.coinbase 0xYourAddress \
+  --p2p.p2pIp IP
+```
+Replace the following variables before you Run the node:
+
+- RPC_URL & BEACON_URL: Step 4
+- 0xYourPrivateKey: Your EVM wallet private key starting with 0x...
+- 0xYourAddress: Your EVM wallet public address starting with 0x...
+- IP: Your server IP (Step 7)
+
+
+## Done for CLI method
+
 
 
 
