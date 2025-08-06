@@ -419,6 +419,10 @@ aztec-up 1.2.0
 ```
 rm -rf ~/.aztec/alpha-testnet/data/
 ```
+- Create Session
+```
+screen -S aztec
+```
 4. Rerun using this CLI command
 ```
 aztec start --node --archiver --sequencer \
