@@ -440,6 +440,25 @@ Replace the following variables before you Run the node:
 - 0xYourAddress: Your EVM wallet public address starting with 0x...
 - IP: Your server IP (Step 7)
 
+# If you’re still getting the INT value type cannot accept a floating-point value error, try running this command:
+
+<img width="1192" height="128" alt="image" src="https://github.com/user-attachments/assets/3bbca4fe-4217-4fd4-8e38-6d2cf294bd1d" />
+
+- reset your data:
+```
+rm -rf /root/.aztec/alpha-testnet/data && \
+mkdir -p /root/.aztec/alpha-testnet && \
+wget https://files5.blacknodes.net/aztec/aztec-alpha-testnet.tar.lz4 -O /root/aztec-alpha-testnet.tar.lz4 && \
+lz4 -d /root/aztec-alpha-testnet.tar.lz4 | tar x -C /root/.aztec/alpha-testnet && \
+rm /root/aztec-alpha-testnet.tar.lz4
+```
+
+- Restart your squencer node! 
+- CLI
+https://github.com/Gmhax/aztec-packages?tab=readme-ov-file#cli-method
+
+- Docker
+https://github.com/Gmhax/aztec-packages?tab=readme-ov-file#cli-method
 
 ## Done for CLI method
 
