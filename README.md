@@ -456,12 +456,12 @@ rm /root/aztec-alpha-testnet.tar.lz4
 
 - Restart your squencer node! 
 - CLI
-https://github.com/Gmhax/aztec-packages?tab=readme-ov-file#cli-method
+https://github.com/Gmhax/aztec-packages/blob/next/README.md#4-rerun-using-this-cli-command
 
 - Docker
-https://github.com/Gmhax/aztec-packages?tab=readme-ov-file#cli-method
+https://github.com/Gmhax/aztec-packages/blob/next/README.md#-get-into-aztec-directory
 
-## Done for CLI method
+# Honk if you plonk
 
 
 
