@@ -444,6 +444,10 @@ Replace the following variables before you Run the node:
 
 <img width="1222" height="665" alt="image" src="https://github.com/user-attachments/assets/9ef771d6-bbfc-462e-803e-0f5e3d6594aa" />
 
+-  Get into `aztec` directory:
+```bash
+cd aztec
+```
 
 - reset your data:
 ```
