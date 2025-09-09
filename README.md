@@ -226,7 +226,7 @@ ufw allow 8080
 mkdir aztec
 ```
 
-* Get into `aztec` directory:
+# * Get into `aztec` directory:
 ```bash
 cd aztec
 ```
@@ -423,7 +423,7 @@ rm -rf ~/.aztec/alpha-testnet/data/
 ```
 screen -S aztec
 ```
-4. Rerun using this CLI command
+# 4. Rerun using this CLI command
 ```
 aztec start --node --archiver --sequencer \
   --network alpha-testnet \
@@ -442,7 +442,8 @@ Replace the following variables before you Run the node:
 
 # If you’re still getting the INT value type cannot accept a floating-point value error, try running this command:
 
-<img width="1192" height="128" alt="image" src="https://github.com/user-attachments/assets/3bbca4fe-4217-4fd4-8e38-6d2cf294bd1d" />
+<img width="1222" height="665" alt="image" src="https://github.com/user-attachments/assets/9ef771d6-bbfc-462e-803e-0f5e3d6594aa" />
+
 
 - reset your data:
 ```
