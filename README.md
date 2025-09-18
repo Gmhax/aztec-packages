@@ -481,10 +481,11 @@ cd aztec && docker compose down -v
 ```
 nano docker-compose.yml
 ```
-- Edit to this in ur yml file
+- Edit to this in ur yml file:
+
 - Image: ```image: aztecprotocol/aztec:2.0.2```
 - entrypoint: > ```sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network testnet --node --archiver --sequencer'```
-` Volumes ```- /root/.aztec/testnet/data/:/data```
+- Volumes ```- /root/.aztec/testnet/data/:/data```
 
 - save it-Ctrl + O , Press Enter , Ctrl + X
 
