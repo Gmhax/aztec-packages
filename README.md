@@ -496,7 +496,7 @@ docker compose up -d
 docker compose logs -f --tail=100
 ```
 
-- Note: if you encounter WARN: sequencer Cannot propose block 1 at next L2 slot 1005 since the committee does not exist on L1, It’ll start producing blocks by Friday
+- Note: if you encounter "WARN: sequencer Cannot propose block 1 at next L2 slot 1005 since the committee does not exist on L1"  just ignored
 
 - Done
 
