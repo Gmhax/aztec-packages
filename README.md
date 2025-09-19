@@ -518,13 +518,17 @@ docker compose logs -f --tail=100
 
 ## CLI 
 
-- Open screen session:
+- Stop node
 ```
-screen -r aztec
+screen -ls | grep -i aztec | awk '{print $1}' | xargs -I {} screen -X -S {} quit
 ```
 - Delete data
 ```
 rm -rf ~/.aztec/alpha-testnet/data/
+```
+- Create screen session
+```
+screen -S aztec
 ```
 
 - Rerun:
