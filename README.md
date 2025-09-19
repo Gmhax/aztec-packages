@@ -500,9 +500,43 @@ docker compose logs -f --tail=100
 
 - Done
 
+Aztec update:
+For those experiencing errors
 
+<img width="1082" height="1000" alt="image" src="https://github.com/user-attachments/assets/b719f2d0-aa1c-4aba-8172-b6419721986f" />
 
+## Docker:
+```
+cd aztec && docker compose down -v
+```
+```
+docker compose up -d
+```
+```
+docker compose logs -f --tail=100
+```
 
+## CLI 
+
+- Open screen session:
+```
+screen -r aztec
+```
+- Delete data
+```
+rm -rf ~/.aztec/alpha-testnet/data/
+```
+
+- Rerun:
+```
+aztec start --node --archiver --sequencer \
+  --network alpha-testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls BEACON_URL \
+  --sequencer.validatorPrivateKeys 0xYourPrivateKey \
+  --sequencer.coinbase 0xYourAddress \
+  --p2p.p2pIp IP
+```
 
 
 
