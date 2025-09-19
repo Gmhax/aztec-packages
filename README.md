@@ -542,11 +542,10 @@ aztec start --node --archiver --sequencer \
   --p2p.p2pIp IP
 ```
 
+- Dettach session: Ctrl A+D
 
 
-
-
-
+# DONE 
 
 
 
