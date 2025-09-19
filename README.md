@@ -500,7 +500,7 @@ docker compose logs -f --tail=100
 
 - Done
 
-Aztec update:
+# Aztec update:
 For those experiencing errors
 
 <img width="1082" height="1000" alt="image" src="https://github.com/user-attachments/assets/b719f2d0-aa1c-4aba-8172-b6419721986f" />
