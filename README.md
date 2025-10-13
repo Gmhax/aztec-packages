@@ -618,6 +618,87 @@ docker logs -n 50 aztec-sequencer | grep governance
 ## DONE BRO
 
 
+## Step-by-Step Update to update your RPC 
+- Edit the file
+```
+cd ~/Ethereum
+nano docker-compose.yml
+```
+
+- Replace everything with this updated content:
+```
+services:
+  reth:
+    image: ghcr.io/paradigmxyz/reth:v1.8.2
+    container_name: reth
+    restart: unless-stopped
+    volumes:
+      - ./Execution:/data
+      - ./jwt.hex:/data/jwt.hex
+    command:
+      - node
+      - --chain=sepolia
+      - --full
+      - --datadir=/data
+      - --http
+      - --http.addr=0.0.0.0
+      - --http.api=eth,net,web3,admin
+      - --http.corsdomain=*
+      - --ws
+      - --ws.addr=0.0.0.0
+      - --ws.api=eth,net,web3,admin
+      - --authrpc.addr=0.0.0.0
+      - --authrpc.port=8551
+      - --authrpc.jwtsecret=/data/jwt.hex
+    ports:
+      - 8545:8545
+      - 8546:8546
+
+  prysm:
+    image: gcr.io/prysmaticlabs/prysm/beacon-chain:v6.1.2
+    container_name: prysm
+    restart: unless-stopped
+    depends_on:
+      - reth
+    volumes:
+      - ./Consensus:/data
+      - ./jwt.hex:/data/jwt.hex
+    command:
+      - --sepolia
+      - --datadir=/data
+      - --execution-endpoint=http://reth:8551
+      - --jwt-secret=/data/jwt.hex
+      - --rpc-host=0.0.0.0
+      - --grpc-gateway-host=0.0.0.0
+      - --blob-storage-layout=by-epoch
+      - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
+      - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
+      - --accept-terms-of-use
+      - --subscribe-all-data-subnets     # ✅ Required for Fusaka / Aztec Supernode mode
+    ports:
+      - 3500:3500
+      - 4000:4000
+```
+- Changes made:
+- Locked Reth to v1.8.2
+- Locked Prysm to v6.1.2
+- Added --subscribe-all-data-subnets for Prysm (supernode flag required by Aztec)
+- Cleaned formatting for easier reading
+
+## Save and exit
+CTRL + O → Enter → CTRL + X
+
+## Pull and restart the clients
+```
+docker compose pull && docker compose up -d
+```
+
+## Verify versions
+```
+docker exec -it reth reth --version && docker exec -it prysm /app/cmd/beacon-chain/beacon-chain --version
+```
+<img width="1080" height="150" alt="image" src="https://github.com/user-attachments/assets/930c9ac5-17fc-4fe0-b99a-f1c610444a84" />
+
 
 
 
