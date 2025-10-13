@@ -618,7 +618,7 @@ docker logs -n 50 aztec-sequencer | grep governance
 ## DONE BRO
 
 
-## Step-by-Step Update to update your RPC 
+## Step-by-Step to update your RPC 
 - Edit the file
 ```
 cd ~/Ethereum
