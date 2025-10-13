@@ -588,6 +588,8 @@ services:
     volumes:
       - /root/.aztec/testnet/data/:/data
 ```
+- CTRL + O → Enter → CTRL + X
+
 - Rerun
 ```
 docker compose up -d
