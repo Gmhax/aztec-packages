@@ -552,6 +552,7 @@ aztec start --node --archiver --sequencer \
 ```
 cd aztec
 docker compose down
+rm -rf ~/.aztec/testnet/data/
 ```
 
 - Allow 8880 port
