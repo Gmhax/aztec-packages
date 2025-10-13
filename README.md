@@ -548,6 +548,82 @@ aztec start --node --archiver --sequencer \
 # DONE 
 
 
+## Aztec voting update:
+```
+cd aztec
+docker compose down
+```
+
+- Allow 8880 port
+```
+sudo ufw allow 8880
+```
+- edit docker compose.yml
+```
+nano docker-compose.yml
+```
+- Paste this:
+```
+services:
+  aztec-node:
+    container_name: aztec-sequencer
+    image: aztecprotocol/aztec:2.0.2
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      COINBASE: ${COINBASE}
+      P2P_IP: ${P2P_IP}
+      LOG_LEVEL: info
+    entrypoint: >
+      sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network testnet --node --archiver --sequencer'
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8080:8080
+      - 8880:8880 
+    volumes:
+      - /root/.aztec/testnet/data/:/data
+```
+- Rerun
+```
+docker compose up -d
+```
+- Once it’s stable (you can wait 2–3 minutes more)
+- Ctrl + C
+- Paste this command:
+```
+curl -X POST http://localhost:8880 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "jsonrpc":"2.0",
+    "method":"nodeAdmin_setConfig",
+    "params":[{"governanceProposerPayload":"0x9D8869D17Af6B899AFf1d93F23f863FF41ddc4fa"}],
+    "id":1
+  }'
+```
+
+- Confirm if the vote/proposal was applied:
+```
+docker logs -n 50 aztec-sequencer | grep governance
+```
+- If you see an image like the one below, it means your proposal has been applied.
+<img width="1382" height="820" alt="image" src="https://github.com/user-attachments/assets/15f1accb-8f3e-4da6-bad1-3907b0be6abe" />
+
+
+
+## DONE BRO
+
+
+
+
+
+
+
+
+
 
 
 
