@@ -621,6 +621,8 @@ docker logs -n 50 aztec-sequencer | grep governance
 
 
 ## Step-by-Step to update your RPC 
+
+## Reth RPC guide
 - Edit the file
 ```
 cd ~/Ethereum
@@ -703,6 +705,101 @@ docker exec -it reth reth --version && docker exec -it prysm /app/cmd/beacon-cha
 
 
 
+## Geth RPC guide
+- Edit the file
+```
+cd ~/Ethereum
+nano docker-compose.yml
+```
+
+- Replace everything with this updated content:
+```
+services:
+    geth:
+        image: ethereum/client-go:v1.16.4
+        container_name: geth
+        network_mode: host
+        restart: unless-stopped
+        ports:
+            - 30303:30303
+            - 30303:30303/udp
+            - 8545:8545
+            - 8546:8546
+            - 8551:8551
+        volumes:
+            - /root/ethereum/execution:/data
+            - /root/ethereum/jwt.hex:/data/jwt.hex
+        command:
+            - --sepolia
+            - --http
+            - --http.api=eth,net,web3
+            - --http.addr=0.0.0.0
+            - --authrpc.addr=0.0.0.0
+            - --authrpc.vhosts=*
+            - --authrpc.jwtsecret=/data/jwt.hex
+            - --authrpc.port=8551
+            - --syncmode=snap
+            - --datadir=/data
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+
+    prysm:
+        image: gcr.io/prysmaticlabs/prysm/beacon-chain:v6.1.2
+        container_name: prysm
+        network_mode: host
+        restart: unless-stopped
+        volumes:
+            - /root/ethereum/consensus:/data
+            - /root/ethereum/jwt.hex:/data/jwt.hex
+        depends_on:
+            - geth
+        ports:
+            - 4000:4000
+            - 3500:3500
+        command:
+            - --sepolia
+            - --accept-terms-of-use
+            - --datadir=/data
+            - --disable-monitoring
+            - --rpc-host=0.0.0.0
+            - --execution-endpoint=http://127.0.0.1:8551
+            - --jwt-secret=/data/jwt.hex
+            - --rpc-port=4000
+            - --grpc-gateway-corsdomain=*
+            - --grpc-gateway-host=0.0.0.0
+            - --grpc-gateway-port=3500
+            - --min-sync-peers=3
+            - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
+            - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
+            - --subscribe-all-data-subnets     # ✅ Required for Fusaka / Aztec Supernode mode
+        logging:
+            driver: "json-file"
+            options:
+                max-size: "10m"
+                max-file: "3"
+```
+- Changes made:
+- Locked Reth to v1.8.2
+- Locked Prysm to v6.1.2
+- Added --subscribe-all-data-subnets for Prysm (supernode flag required by Aztec)
+- Cleaned formatting for easier reading
+
+## Save and exit
+CTRL + O → Enter → CTRL + X
+
+## Pull and restart the clients
+```
+docker compose pull && docker compose up -d
+```
+
+## Verify versions
+```
+docker exec -it reth reth --version && docker exec -it prysm /app/cmd/beacon-chain/beacon-chain --version
+```
+<img width="1080" height="150" alt="image" src="https://github.com/user-attachments/assets/930c9ac5-17fc-4fe0-b99a-f1c610444a84" />
 
 
 
