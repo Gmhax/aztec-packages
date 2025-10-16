@@ -797,7 +797,9 @@ docker compose pull && docker compose up -d
 
 ## Verify versions
 ```
-docker exec -it reth reth --version && docker exec -it prysm /app/cmd/beacon-chain/beacon-chain --version
+docker exec -it geth geth version &&
+docker exec -it prysm /app/cmd/beacon-chain/beacon-chain --version
+
 ```
 <img width="1080" height="150" alt="image" src="https://github.com/user-attachments/assets/930c9ac5-17fc-4fe0-b99a-f1c610444a84" />
 
