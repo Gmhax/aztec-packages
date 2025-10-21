@@ -72,7 +72,6 @@ rm -rf ~/.aztec/alpha-testnet/data/
 3- Update CLI commands
 ```bash
 source ~/.bashrc
-aztec-up 1.2.0
 ```
 
 4- Open `docker-compose.yml`
@@ -206,7 +205,7 @@ aztec
 ## 3. Update Aztec
 ```bash
 aztec-up latest
-aztec-up 1.2.0
+aztec-up 2.0.2
 ```
 
 ## 4. Enable Firewall & Open Ports
