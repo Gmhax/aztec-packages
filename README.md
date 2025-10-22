@@ -450,11 +450,11 @@ cd aztec
 
 - reset your data:
 ```
-rm -rf /root/.aztec/alpha-testnet/data && \
-mkdir -p /root/.aztec/alpha-testnet && \
-wget https://files5.blacknodes.net/aztec/aztec-alpha-testnet.tar.lz4 -O /root/aztec-alpha-testnet.tar.lz4 && \
-lz4 -d /root/aztec-alpha-testnet.tar.lz4 | tar x -C /root/.aztec/alpha-testnet && \
-rm /root/aztec-alpha-testnet.tar.lz4
+rm -rf /root/.aztec/testnet/data && \
+mkdir -p /root/.aztec/testnet && \
+wget https://files5.blacknodes.net/aztec/aztec-testnet.tar.lz4 -O /root/aztec-testnet.tar.lz4 && \
+lz4 -d /root/aztec-testnet.tar.lz4 | tar x -C /root/.aztec/testnet && \
+rm /root/aztec-testnet.tar.lz4
 ```
 
 - Restart your squencer node! 
