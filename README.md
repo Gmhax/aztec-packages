@@ -901,30 +901,9 @@ sudo ufw allow 8880
 ```
 nano docker-compose.yml
 ```
-- Paste this:
+- Add this port:
 ```
-services:
-  aztec-node:
-    container_name: aztec-sequencer
-    image: aztecprotocol/aztec:2.0.4
-    restart: unless-stopped
-    environment:
-      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
-      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
-      DATA_DIRECTORY: /data
-      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
-      COINBASE: ${COINBASE}
-      P2P_IP: ${P2P_IP}
-      LOG_LEVEL: info
-    entrypoint: >
-      sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network testnet --node --archiver --sequencer'
-    ports:
-      - 40400:40400/tcp
-      - 40400:40400/udp
-      - 8080:8080
-      - 8880:8880 
-    volumes:
-      - /root/.aztec/testnet/data/:/data
+- 8880:8880 
 ```
 - CTRL + O → Enter → CTRL + X
 
