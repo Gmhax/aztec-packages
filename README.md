@@ -804,11 +804,152 @@ docker exec -it prysm /app/cmd/beacon-chain/beacon-chain --version
 
 
 
+# Update Sequencer Node v2.0.4
+
+## Update docker-compose method Nodes
+
+1. Stop node
+```
+docker stop $(docker ps -q --filter "ancestor=aztecprotocol/aztec") && docker rm $(docker ps -a -q --filter "ancestor=aztecprotocol/aztec")
+
+# Or
+
+cd aztec
+docker compose down -v
+```
+
+2. Update CLI commands
+```
+source ~/.bashrc
+aztec-up 2.0.4
+```
+
+3. Delete old data
+```
+rm -rf ~/.aztec/testnet/data/
+```
+
+4. Edit docker-compose.yml
+```
+nano docker-compose.yml
+```
+- Edit this line - image: aztecprotocol/aztec:2.0.2 to image: aztecprotocol/aztec:2.0.4
+
+5. Re-run your node:
+```
+docker compose up -d
+```
+
+Check logs:
+```
+docker compose logs -fn 1000
+```
+
+## Done for Docker method
+
+# Update CLI method Nodes
+
+1. Stop node
+```
+screen -ls | grep -i aztec | awk '{print $1}' | xargs -I {} screen -X -S {} quit
+```
+
+2. Update CLI commands
+```
+source ~/.bashrc
+aztec-up 2.0.4
+```
+3. Delete old data
+```
+rm -rf ~/.aztec/testnet/data/
+```
+- Create Session
+```
+screen -S aztec
+```
+# 4. Rerun using this CLI command
+```
+aztec start --node --archiver --sequencer \
+  --network testnet \
+  --l1-rpc-urls RPC_URL  \
+  --l1-consensus-host-urls BEACON_URL \
+  --sequencer.validatorPrivateKeys 0xYourPrivateKey \
+  --sequencer.coinbase 0xYourAddress \
+  --p2p.p2pIp IP
+```
+Replace the following variables before you Run the node:
+
+- RPC_URL & BEACON_URL: Step 4
+- 0xYourPrivateKey: Your EVM wallet private key starting with 0x...
+- 0xYourAddress: Your EVM wallet public address starting with 0x...
+- IP: Your server IP (Step 7)
 
 
 
+## Governance Proposal:
+```
+cd aztec
+docker compose down
+rm -rf ~/.aztec/testnet/data/
+```
 
+- Allow 8880 port
+```
+sudo ufw allow 8880
+```
+- edit docker compose.yml
+```
+nano docker-compose.yml
+```
+- Paste this:
+```
+services:
+  aztec-node:
+    container_name: aztec-sequencer
+    image: aztecprotocol/aztec:2.0.4
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      COINBASE: ${COINBASE}
+      P2P_IP: ${P2P_IP}
+      LOG_LEVEL: info
+    entrypoint: >
+      sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network testnet --node --archiver --sequencer'
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8080:8080
+      - 8880:8880 
+    volumes:
+      - /root/.aztec/testnet/data/:/data
+```
+- CTRL + O → Enter → CTRL + X
 
+- Rerun
+```
+docker compose up -d
+```
+- Once it’s stable (you can wait 2–3 minutes more)
+- Ctrl + C
+- Paste this command:
+```
+curl -X POST http://0.0.0.0:8880 \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "jsonrpc":"2.0",
+    "method":"nodeAdmin_setConfig",
+    "params":[{"governanceProposerPayload":"0xDCd9DdeAbEF70108cE02576df1eB333c4244C666"}],
+    "id":1
+  }'
+```
+
+- Confirm if the vote/proposal was applied:
+```
+docker logs -n 50 aztec-sequencer | grep governance
+```
 
 
 
