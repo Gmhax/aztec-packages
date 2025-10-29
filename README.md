@@ -442,27 +442,36 @@ Replace the following variables before you Run the node:
 # If you’re still getting the INT value type cannot accept a floating-point value error, try running this command:
 
 <img width="1222" height="665" alt="image" src="https://github.com/user-attachments/assets/9ef771d6-bbfc-462e-803e-0f5e3d6594aa" />
-
--  Get into `aztec` directory:
+## Docker method. 
+-  Get into `aztec` directory & reset your data. 
 ```bash
-cd aztec
+cd ~/aztec && \
+docker compose down && \
+sed -i "s|--sequencer'|--sequencer --snapshots-url https://snapshots.aztec.graphops.xyz/files/'|" docker-compose.yml && \
+docker compose pull && \
+docker compose up -d
 ```
 
-- reset your data:
+## CLI method
+
+- Stop your node: Ctrl + C
+
 ```
-rm -rf /root/.aztec/testnet/data && \
-mkdir -p /root/.aztec/testnet && \
-wget https://files5.blacknodes.net/aztec/aztec-testnet.tar.lz4 -O /root/aztec-testnet.tar.lz4 && \
-lz4 -d /root/aztec-testnet.tar.lz4 | tar x -C /root/.aztec/testnet && \
-rm /root/aztec-testnet.tar.lz4
+rm -rf ~/.aztec/testnet/data/
 ```
 
-- Restart your squencer node! 
-- CLI
-https://github.com/Gmhax/aztec-packages/blob/next/README.md#4-rerun-using-this-cli-command
+```
+aztec start --node --archiver --sequencer \
+  --network testnet \
+  --l1-rpc-urls <your_l1_rpc_urls> \
+  --l1-consensus-host-urls <your_l1_consensus_host_urls> \
+  --sequencer.validatorPrivateKeys <your_private_key> \
+  --sequencer.coinbase <your_coinbase_address> \
+  --p2p.p2pIp <your_ip> \
+  --snapshots-url https://snapshots.aztec.graphops.xyz/files/
+```
 
-- Docker
-https://github.com/Gmhax/aztec-packages/blob/next/README.md#-get-into-aztec-directory
+
 
 # Honk if you plonk
 
