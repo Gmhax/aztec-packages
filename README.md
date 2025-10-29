@@ -442,8 +442,11 @@ Replace the following variables before you Run the node:
 # If you’re still getting the INT value type cannot accept a floating-point value error, try running this command:
 
 <img width="1222" height="665" alt="image" src="https://github.com/user-attachments/assets/9ef771d6-bbfc-462e-803e-0f5e3d6594aa" />
+
 ## Docker method. 
--  Get into `aztec` directory & reset your data. 
+
+-  Get into `aztec` directory & reset your data.
+
 ```bash
 cd ~/aztec && \
 docker compose down && \
