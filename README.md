@@ -450,6 +450,7 @@ Replace the following variables before you Run the node:
 ```bash
 cd ~/aztec && \
 docker compose down && \
+rm -rf ~/.aztec/test && \
 sed -i "s|--sequencer'|--sequencer --snapshots-url https://snapshots.aztec.graphops.xyz/files/'|" docker-compose.yml && \
 docker compose pull && \
 docker compose up -d
