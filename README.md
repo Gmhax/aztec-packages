@@ -963,6 +963,13 @@ source ~/.bashrc
 aztec-up latest
 aztec-up 2.1.2
 ```
+## Download and install Foundryup (the installer)
+```
+  curl -L https://foundry.paradigm.xyz | bash
+   source ~/.bashrc
+   foundryup
+```
+
 - Export your RPC
 ```export ETH_RPC=https://your_rpc_here```
 - Export your Pk
