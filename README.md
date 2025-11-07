@@ -944,6 +944,72 @@ docker logs -n 50 aztec-sequencer | grep governance
 ```
 
 
+## Sequencer update v2.1.2
+- Stop previous squencer
+```
+cd ~/aztec && \
+docker compose down && \
+rm -rf /root/.aztec/testnet/data && \
+sed -i 's|^ *image: aztecprotocol/aztec:.*|    image: aztecprotocol/aztec:2.1.2|' docker-compose.yml && \
+sed -i 's|--network alpha-testnet|--network testnet|g' docker-compose.yml && \
+docker compose pull
+```
+- Type: `cd`
+- Download new uupdate:
+```
+bash -i <(curl -s https://install.aztec.network)
+echo 'export PATH="$HOME/.aztec/bin:$PATH"' >> ~/.bashrc
+source ~/.bashrc
+aztec-up latest
+aztec-up 2.1.2
+```
+- export your rpc
+```export ETH_RPC=https://your_rpc_here```
+- To join you'll need to 1st approve the Aztec rollup to spend the 200k STAKE which is the balance required to join as a sequencer.
+```
+cast send 0x139d2a7a0881e16332d7D1F8DB383A4507E1Ea7A "approve(address,uint256)" 0xebd99ff0ff6677205509ae73f93d0ca52ac85d67 200000ether --private-key "$PRIVATE_KEY_OF_OLD_SEQUENCER" --rpc-url $ETH_RPC
+```
+- Check https://sepolia.etherscan.io/ check your address
+<img width="1396" height="573" alt="image" src="https://github.com/user-attachments/assets/516bce3f-0f66-48d5-8951-8a5cfb925988" />
+
+- Create BLS keys
+```
+aztec validator-keys new \
+  --fee-recipient 0x0000000000000000000000000000000000000000000000000000000000000000
+```
+- Output like this.
+- Sent 0.1 eth sppolia on your attester address: ex. check photo below highlighted 
+<img width="641" height="95" alt="image" src="https://github.com/user-attachments/assets/8a21aabd-1065-4d07-85c0-0a538a818d83" />
+
+- Add your address on validator set.
+- Change the corripoding your generate BLS here: 
+```
+aztec \
+  add-l1-validator \
+  --l1-rpc-urls $ETH_RPC \
+  --network testnet \
+  --private-key $PRIVATE_KEY_OF_OLD_SEQUENCER \
+  --attester <yourattesteraddress> \
+  --withdrawer <yourseqeunceraddress> \
+  --bls-secret-key <yourBLSsecretkey> \
+  --rollup 0xebd99ff0ff6677205509ae73f93d0ca52ac85d67
+```
+<img width="1886" height="56" alt="image" src="https://github.com/user-attachments/assets/20180412-931e-480a-8edd-fc73d8d12706" />
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
 
 
 
