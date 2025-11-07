@@ -945,7 +945,7 @@ docker logs -n 50 aztec-sequencer | grep governance
 
 
 # Sequencer update v2.1.2
-## Stop previous sequencer
+### Stop previous sequencer
 ```
 cd ~/aztec && \
 docker compose down && \
@@ -955,7 +955,7 @@ sed -i 's|--network alpha-testnet|--network testnet|g' docker-compose.yml && \
 docker compose pull
 ```
 - Type: `cd`
-## Download the new update
+### Download the new update
 ```
 bash -i <(curl -s https://install.aztec.network)
 echo 'export PATH="$HOME/.aztec/bin:$PATH"' >> ~/.bashrc
@@ -963,7 +963,7 @@ source ~/.bashrc
 aztec-up latest
 aztec-up 2.1.2
 ```
-## Download and install Foundryup (the installer)
+### Download and install Foundryup
 ```
  curl -L https://foundry.paradigm.xyz | bash
  source ~/.bashrc
@@ -974,14 +974,14 @@ aztec-up 2.1.2
 ```export ETH_RPC=https://your_rpc_here```
 - Export your Pk
 ```export PRIVATE_KEY_OF_OLD_SEQUENCER=yoursequencerPK```
-## Approve the 200k STAKE
+### Approve the 200k STAKE
 ```
 cast send 0x139d2a7a0881e16332d7D1F8DB383A4507E1Ea7A "approve(address,uint256)" 0xebd99ff0ff6677205509ae73f93d0ca52ac85d67 200000ether --private-key "$PRIVATE_KEY_OF_OLD_SEQUENCER" --rpc-url $ETH_RPC
 ```
 - After sending the transaction, verify it on Sepolia Etherscan: https://sepolia.etherscan.io/
 <img width="1396" height="573" alt="image" src="https://github.com/user-attachments/assets/516bce3f-0f66-48d5-8951-8a5cfb925988" />
 
-## Create your BLS keys
+### Create your BLS keys
 ```
 aztec validator-keys new \
   --fee-recipient 0x0000000000000000000000000000000000000000000000000000000000000000
@@ -990,7 +990,7 @@ aztec validator-keys new \
 - Your output will look like this:
 <img width="641" height="95" alt="image" src="https://github.com/user-attachments/assets/8a21aabd-1065-4d07-85c0-0a538a818d83" />
 
-## Add your address to the validator set
+### Add your address to the validator set
 - Use your generated BLS key.
 ```
 aztec \
@@ -1007,7 +1007,7 @@ aztec \
 
 - Now check you sequencer address here: https://dashtec.xyz/queue
 
-## Execute your seqeuncer
+### Execute your seqeuncer
 ```cd ~/aztec && docker compose up -d```
 - Check logs.
 ```
