@@ -951,7 +951,6 @@ cd ~/aztec && \
 docker compose down && \
 rm -rf /root/.aztec/testnet/data && \
 sed -i 's|^ *image: aztecprotocol/aztec:.*|    image: aztecprotocol/aztec:2.1.2|' docker-compose.yml && \
-sed -i 's|--network alpha-testnet|--network testnet|g' docker-compose.yml && \
 docker compose pull
 ```
 - Type: `cd`
