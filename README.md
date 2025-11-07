@@ -972,13 +972,13 @@ cast send 0x139d2a7a0881e16332d7D1F8DB383A4507E1Ea7A "approve(address,uint256)" 
 - Check https://sepolia.etherscan.io/ check your address
 <img width="1396" height="573" alt="image" src="https://github.com/user-attachments/assets/516bce3f-0f66-48d5-8951-8a5cfb925988" />
 
-- Create BLS keys
+## Create BLS keys
 ```
 aztec validator-keys new \
   --fee-recipient 0x0000000000000000000000000000000000000000000000000000000000000000
 ```
-- Output like this.
 - Sent 0.1 eth sppolia on your attester address: ex. check photo below highlighted 
+- Output like this.
 <img width="641" height="95" alt="image" src="https://github.com/user-attachments/assets/8a21aabd-1065-4d07-85c0-0a538a818d83" />
 
 - Add your address on validator set.
