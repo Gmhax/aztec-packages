@@ -965,9 +965,9 @@ aztec-up 2.1.2
 ```
 ## Download and install Foundryup (the installer)
 ```
-  curl -L https://foundry.paradigm.xyz | bash
-   source ~/.bashrc
-   foundryup
+ curl -L https://foundry.paradigm.xyz | bash
+ source ~/.bashrc
+ foundryup
 ```
 
 - Export your RPC
