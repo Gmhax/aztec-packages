@@ -965,6 +965,8 @@ aztec-up 2.1.2
 ```
 - Export your RPC
 ```export ETH_RPC=https://your_rpc_here```
+- Export your Pk
+```export PRIVATE_KEY_OF_OLD_SEQUENCER=yoursequencerPK```
 ## Approve the 200k STAKE
 ```
 cast send 0x139d2a7a0881e16332d7D1F8DB383A4507E1Ea7A "approve(address,uint256)" 0xebd99ff0ff6677205509ae73f93d0ca52ac85d67 200000ether --private-key "$PRIVATE_KEY_OF_OLD_SEQUENCER" --rpc-url $ETH_RPC
