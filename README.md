@@ -970,7 +970,7 @@ aztec-up 2.1.2
 ```
 
 - Export your RPC
-```export ETH_RPC=https://your_rpc_here```
+```export ETH_RPC=http://your_rpc_here```
 - Export your Pk
 ```export PRIVATE_KEY_OF_OLD_SEQUENCER=yoursequencerPK```
 ### Approve the 200k STAKE
