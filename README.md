@@ -989,6 +989,25 @@ aztec validator-keys new \
 - Your output will look like this:
 <img width="641" height="95" alt="image" src="https://github.com/user-attachments/assets/8a21aabd-1065-4d07-85c0-0a538a818d83" />
 
+### Save your Private keys.
+```cat /root/.aztec/keystore/key1.json```
+- Format like this:
+```
+{
+  "schemaVersion": 1,
+  "validators": [
+    {
+      "attester": {
+        "eth": "0x1234567890123456789012345678901234567890123456789012345678901234",
+        "bls": "0x2345678901234567890123456789012345678901234567890123456789012345"
+      },
+      "feeRecipient": "0x0000000000000000000000000000000000000000000000000000000000000000"
+    }
+  ]
+}
+```
+- Copy your Attester private key, then edit your `nano .env`
+
 ### Add your address to the validator set
 - Use your generated BLS key.
 ```
