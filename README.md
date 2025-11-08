@@ -991,7 +991,7 @@ aztec validator-keys new \
 
 ### Save your Private keys.
 ```cat /root/.aztec/keystore/key1.json```
-- Format like this:
+- Output like this:
 ```
 {
   "schemaVersion": 1,
