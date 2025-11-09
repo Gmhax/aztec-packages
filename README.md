@@ -1031,7 +1031,7 @@ cd ~/aztec && \
 docker compose down && \
 rm -rf /root/.aztec/testnet/data
 ```
-- .env file
+- `nano .env` file
 ```
 # Ethereum / Beacon RPC endpoints
 ETHEREUM_RPC_URL=http://localhost:8545          # Replace with your Sepolia RPC URL
@@ -1046,7 +1046,7 @@ P2P_IP=YOUR_PUBLIC_IP                          # Replace with your node's public
 GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0xDCd9DdeAbEF70108cE02576df1eB333c4244C666
 ```
 
-- docker-compose.yml file
+- `nano docker-compose.yml` file
 ```
 services:
   aztec-node:
