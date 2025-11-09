@@ -687,8 +687,8 @@ services:
       - --rpc-host=0.0.0.0
       - --grpc-gateway-host=0.0.0.0
       - --blob-storage-layout=by-epoch
-      - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
-      - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
+      - --checkpoint-sync-url=https://sepolia.beaconstate.info
+      - --genesis-beacon-api-url=https://sepolia.beaconstate.info
       - --accept-terms-of-use
       - --subscribe-all-data-subnets     # ✅ Required for Fusaka / Aztec Supernode mode
     ports:
@@ -784,8 +784,8 @@ services:
             - --grpc-gateway-host=0.0.0.0
             - --grpc-gateway-port=3500
             - --min-sync-peers=3
-            - --checkpoint-sync-url=https://checkpoint-sync.sepolia.ethpandaops.io
-            - --genesis-beacon-api-url=https://checkpoint-sync.sepolia.ethpandaops.io
+            - --checkpoint-sync-url=https://sepolia.beaconstate.info
+            - --genesis-beacon-api-url=https://sepolia.beaconstate.info
             - --subscribe-all-data-subnets     # ✅ Required for Fusaka / Aztec Supernode mode
         logging:
             driver: "json-file"
