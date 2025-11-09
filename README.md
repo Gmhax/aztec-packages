@@ -1073,7 +1073,7 @@ services:
 ```
 
 ### Execute your seqeuncer
-```docker compose up -d```
+```docker compose pull && docker compose up -d```
 - Check logs.
 ```
 docker compose logs -fn 1000
