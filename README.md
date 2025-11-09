@@ -1025,8 +1025,55 @@ aztec \
 
 - Now check you sequencer address here: https://dashtec.xyz/queue
 
+## Setup your sequencer
+```
+cd ~/aztec
+```
+- .env file
+```
+# Ethereum / Beacon RPC endpoints
+ETHEREUM_RPC_URL=http://localhost:8545          # Replace with your Sepolia RPC URL
+CONSENSUS_BEACON_URL=http://localhost:3500     # Replace with your Beacon RPC URL
+
+# Validator & rewards
+VALIDATOR_PRIVATE_KEYS=0xYOUR_PRIVATE_KEY      # Replace with your private key
+COINBASE=0xYOUR_ETH_ADDRESS                    # Replace with your Ethereum address
+
+# Node network
+P2P_IP=YOUR_PUBLIC_IP                          # Replace with your node's public IP
+GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0xDCd9DdeAbEF70108cE02576df1eB333c4244C666
+```
+
+- docker-compose.yml file
+```
+version: "3.8"
+
+services:
+  aztec-node:
+    container_name: aztec-sequencer
+    image: aztecprotocol/aztec:2.0.2
+    restart: unless-stopped
+    environment:
+      ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
+      L1_CONSENSUS_HOST_URLS: ${CONSENSUS_BEACON_URL}
+      DATA_DIRECTORY: /data
+      VALIDATOR_PRIVATE_KEYS: ${VALIDATOR_PRIVATE_KEYS}
+      COINBASE: ${COINBASE}
+      P2P_IP: ${P2P_IP}
+      GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS: ${GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS}
+      LOG_LEVEL: info
+    entrypoint: >
+      sh -c 'node --no-warnings /usr/src/yarn-project/aztec/dest/bin/index.js start --network testnet --node --archiver --sequencer'
+    ports:
+      - 40400:40400/tcp
+      - 40400:40400/udp
+      - 8080:8080
+    volumes:
+      - /root/.aztec/testnet/data/:/data
+```
+
 ### Execute your seqeuncer
-```cd ~/aztec && docker compose up -d```
+```docker compose up -d```
 - Check logs.
 ```
 docker compose logs -fn 1000
