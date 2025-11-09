@@ -1048,12 +1048,10 @@ GOVERNANCE_PROPOSER_PAYLOAD_ADDRESS=0xDCd9DdeAbEF70108cE02576df1eB333c4244C666
 
 - docker-compose.yml file
 ```
-version: "3.8"
-
 services:
   aztec-node:
     container_name: aztec-sequencer
-    image: aztecprotocol/aztec:2.0.2
+    image: aztecprotocol/aztec:2.1.2
     restart: unless-stopped
     environment:
       ETHEREUM_HOSTS: ${ETHEREUM_RPC_URL}
