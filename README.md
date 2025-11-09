@@ -1027,7 +1027,9 @@ aztec \
 
 ## Setup your sequencer
 ```
-cd ~/aztec
+cd ~/aztec && \
+docker compose down && \
+rm -rf /root/.aztec/testnet/data
 ```
 - .env file
 ```
